@@ -1,0 +1,363 @@
+<%- include('../partials/header') %>
+<style>
+  .header{
+    display: none;
+  }
+  .page-bg{
+    background-color: #2061BD; 
+    background-image:linear-gradient(to right, rgba(22, 98, 161,1),rgba(22, 98, 161,0.76)),url('/images/lake.jpg');
+    background-size: 1950px;
+    background-position-y: 1750px;
+  }
+
+  /* Holiday Themes */
+  /* .page-bg{
+    background-color: #2061BD; 
+    background-image:linear-gradient(to right, rgba(150, 188, 233,1),rgba(150, 188, 233,0.76)),url('/images/easter.jpg');
+    background-size: 1950px;
+    background-position-y: 1750px;
+  }
+  #hd-box{
+    border-color:  #96a7e9 !important;
+  }
+  #dir-box{
+    border-color:  #5794dc!important;
+  }
+  .bg-color-aloha{
+    background-color: #5794dc;
+  } */
+</style>
+
+
+ 
+<main id="home">
+  <% if(office_open === false){ %>
+  <div class="animate__animated animate__headShake bg-red-100 border-t-4 border-red-500 rounded-b text-red-darkest px-4 py-3 my-2" role="alert">
+    <div class="flex">
+      <i class="fas fa-info-circle h-6 w-6 text-red-500 mr-4 text-2xl"></i>
+      <div>
+        <p class="font-bold">Office Closed</p>
+        <p class="text-sm"><%= office_open_message %></p>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="container mx-auto">
+    <!-- HEADER -->
+    <!-- INFO: background template is in partials/header, styling is in the style tag above  -->
+    <div class="container mx-auto header-text">
+      <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 pt-5 pb-3">
+        <div class="col-span-1 flex flex-wrap content-center ">
+          <div>
+            <p class="font-bold text-white mb-5 text-4xl lg:text-5xl md:text-4xl sm:text-4xl">Aloha</p> 
+            <h3 class="font-semibold text-white text-lg"> Welcome to the CardWorks Intranet</h3>
+           </div>
+        </div>
+        <div class="mx-auto flex flex-wrap content-center ">
+        </div>
+      </div>
+    </div>
+  
+
+  <div class="block lg:flex lg:space-x-2 lg:p-0 mt-10 mb-10">
+    <!-- HEADING CARDS -->
+    <div>
+      <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 mb-5">
+        <!-- Help Desk Card-->
+        <div id="hd-box" class=" bg-white py-5 px-4 rounded-md shadow-custom-1" style="border-bottom: 5px solid #2C3E72;">
+            <h3>Help Desk & Support</h3>
+            <p class="mb-4">Having technical issues? Submit a ticket and request tech support to resolve your issue.</p>
+            <div class="space-x-3">
+              <a href="/helpdesk" class="inline-block bg-color-aloha hover:bg-blue-700 px-3 py-2 rounded text-white font-semibold">Visit the Help Desk </a>
+              <a class="hidden lg:inline-block bg-color-aloha cursor-pointer hover:bg-blue-700 px-3 py-2 rounded text-white font-semibold show-modal">Open a ticket</a>
+            </div>     
+        </div>
+        <!-- Directory Card-->
+        <div class=" bg-white py-5 px-4 rounded-md shadow-custom-1" style="border-bottom: 5px solid #2061BD;">
+          <h3>Employee Directory</h3>
+          <p class="mb-4">Looking for someone? Easily search or browse staff information with the employee directory.</p>
+          <a href="/directory" class="bg-color-aloha hover:bg-blue-700 px-3 py-2 rounded text-white font-semibold inline-block">Visit the Directory</a>
+        </div>
+      </div>    
+      
+      <!-- Upcoming Section-->
+      <div>
+        <h5 class="font-bold text-md uppercase text-gray-800 px-1 mb-2"> <span class="half_highlight">Upcoming</span> </h5>
+        <upcomingcalendar></upcomingcalendar>
+      </div>
+      
+  </div>
+  
+
+</div>
+
+
+</main>
+
+<template id="upcomingcalendar"> 
+  <% for(var i = 0; i < 2; i++){ %> 
+    <div class="w-full lg:w-11/12 xl:w-full px-1 <%= calendar[i].date.isSame(moment(),'d') ? 'bg-blue-100 animate__animated animate__pulse animate__repeat-3' : 'bg-white' %> py-5 lg:px-2 lg:py-3 tracking-wide mb-2 rounded shadow-custom-1">
+        
+      <div class="inline-block float-left flex flex-row justify-around font-bold leading-none text-gray-800 uppercase rounded md:flex-col md:items-center md:justify-center px-3 mr-3">
+          <div class="md:text-sm"><%= moment(calendar[i].date).format('MMM') %></div>
+          <div class="md:text-2xl"><%= moment(calendar[i].date).format('DD') %></div>
+      </div>
+      <div class="inline-block ml-2 grid grid-cols-1">
+          <div class="flex flex-row lg:justify-start">
+              <div class="text-gray-700 font-medium text-sm text-left lg:text-left px-2">
+                  <i class="far fa-clock"></i> <%= calendar[i].date.isSame(moment(),'d') ? 'Today': calendar[i].date.format('dddd') %>, <%= calendar[i].time %>
+              </div>
+          </div>
+          <div class="font-semibold text-gray-800 text-lg text-left lg:text-left px-2">
+              <%= calendar[i].name %>
+          </div>
+
+          <div class="text-gray-600 font-medium text-sm pt-1 text-left lg:text-left px-2">
+          <%= calendar[i].description %>
+          </div>
+      </div>    
+    </div>
+  <% } %>
+    <div class="flex justify-end">
+      <a class="text-aloha mt-2 font-semibold hover:underline" href="/calendar">See all...</a>
+    </div>  
+</template>
+
+<%- include('../partials/footer') %>
+
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const Home = Vue.createApp({
+    data(){
+      return{
+        
+      }
+    },
+    mounted(){
+      // console.log(dayjs().format())
+    }
+
+  })
+
+  Home.component('helpdesk',{
+    data(){
+      return{
+        modal: false
+      }
+    },
+    template:'#helpdesk'
+  })
+
+  
+  Home.component('upcomingcalendar',{
+    data(){
+      return{
+        dates:''
+      } 
+    },
+    mounted(){
+      var today = dayjs()
+      var currentYear = dayjs().year()
+
+      var dates =[
+          {
+              name:"New Years's Day ",
+              description:"Office Closed Friday, December 31",
+              time:"All day",
+              date: dayjs('01-01').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+
+          {
+              name:"Martin Luther King, Jr. Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('01-17').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"President's Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('02-21').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Memorial Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('05-31').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Independence Day",
+              description:"Office Closed Monday, July 5",
+              time:"All day",
+              date: dayjs('07-04').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Labor Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('09-06').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Columbus Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('10-11').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Veteran's Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('11-11').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Thanksgiving Day",
+              description:"Office Closed",
+              time:"All day",
+              date: dayjs('11-25').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          },
+          {
+              name:"Christmas Day",
+              description:"Office Closed Friday, December 24",
+              time:"All day",
+              date: dayjs('12-25').year(currentYear),
+              get difference(){
+                var diff;
+                const today = dayjs()
+                if(dayjs().isBefore(this.date)){
+                  var nextYear = this.date.add(1, 'year')
+                  diff = today.diff(nextYear, 'day')
+                }else{
+                  diff = today.diff(this.date, 'day')
+                }
+                return(diff)
+              }
+          }
+      ]
+      // console.log(dates.sort((a, b) => a.difference - b.difference))
+      dates.forEach(element => {
+        console.log(element.name + ' ' + element.difference)
+      });
+      console.log(dates[9].date)
+
+    },
+    methods:{
+
+    },
+    computed:{
+
+    },
+    template:'#upcomingcalendar'
+  })
+
+  Home.mount('#home')
+
+  $(".show-modal").click(function(){
+    $('.modal').removeClass('hidden')
+  })
+  $(".close-modal").click(function(){
+    $('.modal').addClass('hidden')
+  })
+</script>

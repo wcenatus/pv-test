@@ -1,0 +1,224 @@
+<%- include('../partials/header') %>
+<style>
+  
+  [v-cloak] {display: none}
+  .page-bg{
+    /* background-color: #2061BD; background-image:linear-gradient(to right, rgba(0,134,127,1),rgba(0,134,127,0.76)); */
+    background-color: #2061BD; background-image:linear-gradient(to right, rgba(158, 25, 70,1),rgba(158, 25, 70,0.76));
+    height: 35rem;
+    background-size: 1950px; 
+    background-position-y: 1700px;
+  }
+  label{
+    padding-top: 3px;
+  }
+  select.error, textarea.error, input.error {
+    border-color:#FF0000;
+  }
+  input[type="search"] {
+    -webkit-appearance: none;
+  }
+  input[type="text"]{
+    -webkit-appearance: none;
+  }
+  input[type="number"]{
+    -webkit-appearance: none;
+  }
+  hr.style4 {
+    border-top: 1px dotted #8c8b8b;
+  }
+
+  ul#benefits{
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  } 
+  ul#benefits li{
+    -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
+  }
+</style>
+<!-- Header -->
+<!-- INFO: background template is in partials/header, styling is in the style tag above  -->
+<div class="mx-auto">
+<form action='/' method="POST" enctype="multipart/form-data">
+  
+  <div id="form-success" class="hidden">
+      <%- include('../partials/forms_success') %>
+    </div>
+
+    
+  <div id="toasty"></div>
+  <div class="container relative mt-4 lg:px-10 w-100 mx-auto mx-auto">
+    <div class="container mx-auto mb-3">
+      <div class="lg:p-0 pl-3">
+        <img style="width: 50px;" src="/images/pv-logo-white.png"/>
+      </div>
+    <div class="grid grid-cols-2 gap-4 px-8">
+      <div class="col-span-2 lg:col-span-2 flex flex-wrap content-center mb-8">
+        <p class="text-white text-xl lg:text-4xl py-5 font-bold whitespace-nowrap">Curbside checkout is easy with CardWorks' mobile terminals & contactless payment solutions.</p>
+        <ul id="benefits" class="font-white font-medium text-md text-white py-5 pt-0 fa-ul">
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span><p class="pr-10">Lorem ipsum dolor sit amet</p></li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Lorem ipsum dolor sit amet</li>
+          <!-- <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span><p class="pr-10">Securely Accept payments anywhere </p></li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Email or text receipts</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Robust reporting</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Real time sales reporting</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Contactless/Tap & Pay</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Accepts ApplePay & SamsungPay</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Improves patient checkout flow</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Recurring Payments</li>
+          <li><span class="fa-li pr-4"><i class="fas fa-check-square"></i></span>Electronic Invoicing</li> -->
+        </ul>
+      </div>
+      <div class="col-span-2 relative">
+        <div class="flex justify-center">
+          <img style="width: 350px; height: auto; position:absolute; bottom: -72px;" class="rounded hidden lg:block " src="/images/animal-image-2.png"/>
+        </div>  
+      </div>
+      </div>
+    <div class="bg-white lg:shadow rounded mt-5 py-8 px-8">
+      <!-- <div class="grid grid-cols-2">
+        <p class="font-bold col-span-2 text-gray-600 mb-5 text-4xl lg:text-2xl md:text-4xl sm:text-4xl block">Merchant Services Referral Form</p> 
+        <hr class="col-span-2 style4">
+      </div> -->
+      
+      <!-- <br/> -->
+      <!-- FORM -->
+      <div id="referralForm" class="grid grid-cols-12 gap-3">    
+
+        <div class="flex flex-col col-span-12">
+          <label class="font-regular text-sm text-gray-600" for="corporateGroup">Corporate Group</label>
+          <input required  autocomplete="nah" type="text" v-model="corporateGroup" name="corporateGroup" id="corporateGroup" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+        </div>
+        <div class="flex flex-col col-span-12 lg:col-span-3">
+          <label class="font-regular text-sm text-gray-600" for="attendeeTitle">Attendee Title</label>
+          <select required autocomplete="nah" type="text" v-model="attendeeTitle" name="attendeeTitle" id="attendeeTitle" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+            <option selected>Choose...</option>
+            <option>Mr.</option>
+            <option>Mrs.</option>
+            <option>Ms.</option>
+            <option>Dr.</option>
+          </select>
+        </div>
+        <div class="flex flex-col col-span-12 lg:col-span-9">
+          <label class="font-regular text-sm text-gray-600" for="attendee">Attendee</label>
+          <input required  autocomplete="nah" type="text" v-model="attendee" name="attendee" id="attendee" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+        </div>
+        
+        <div class="flex flex-col col-span-12 lg:col-span-6">
+          <label class="font-regular text-sm text-gray-600" for="phone">Phone</label>
+          <input required  autocomplete="nah" type="tel" v-model="phone" name="phone" id="phone" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+        </div>
+        <div class="flex flex-col col-span-12 lg:col-span-6">
+          <label class="font-regular text-sm text-gray-600" for="email">Email</label>
+          <input required  autocomplete="nah" type="email" v-model="email" name="email" id="email" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+        </div>
+        <div class="flex flex-col col-span-5 lg:col-span-2">
+          <label class="font-regular text-sm text-gray-600" for="numOfLocations">Number of Locations</label>
+          <input required  autocomplete="nah" type="number" v-model="numOfLocations" name="numOfLocations" id="numOfLocations" placeholder="" class=" w-100 mt-2 py-2 px-3 rounded bg-white dark:bg-gray-800 border border-gray-400 shadow-sm dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+        </div>
+        <div class="col-span-7 lg:col-span-10"></div>
+
+        <div class="col-span-12">
+          <button class="w-full lg:w-auto text-center bg-blue-500 hover:bg-blue-700 px-8 py-2 mt-4 mb-3 rounded text-white font-semibold">
+            <span>Submit</span>
+            <!-- <div class="lds-ring align-center ml-2 hidden"><div></div><div></div><div></div><div></div></div> -->
+          </button>   
+        </div>
+        <!-- <div class="flex justify-end items-stretch ">
+         <a target="_blank" href="<%- 'https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fzimmer.merchantreferral.partners%2Freferrer%2F' + id +'&chs=180x180' %>" class="self-end pb-2 text-gray-400 hover:text-gray-600"><i class="fas fa-qrcode"></i></a>
+        </div> -->
+        
+        
+      </div>   
+    </div>
+  </div>
+</div>
+</form>
+</div>
+  
+<%- include('../partials/footer') %>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script src="/script/cr_validation.js"></script>
+<script>
+
+  const referralForm = Vue.createApp({
+    data(){
+        return{
+          loading: false,
+          focus: false,
+          attendeeTitle:"Choose...",
+          submitSuccess: false,
+          companyname:'',
+          contactname:'',
+          city:'',
+          phone:'',
+          email:'',
+          acceptscreditcards:'yes',
+          comments: '', 
+          file: ''    
+        }
+    },
+    methods:{
+      submit: function(){
+        this.loading = true
+
+        axios.post('/',{
+          companyname: this.companyname,
+          contactname: this.contactname,
+          city: this.city,
+          phone: this.phone,
+          email: this.email,
+          acceptscreditcards: this.acceptscreditcards,
+          comments: this.comments,
+          file: this.file
+        }).then(res =>{
+          this.submitSuccess = true
+          // window.scrollTo(0, 0);
+          // location.reload()
+        }).catch(err => alert("An error occurred please reload and try again"))
+      }
+    }    
+})
+
+referralForm.mount('#referralForm')
+
+  //Toast success message then delete localstorage variable
+  $(window).unload(function () { 
+  $.get('/session/destroy');
+  });
+  var formsuccess = '' || localStorage.getItem('form-success')
+  if(formsuccess === 'success'){
+    $('#toasty').append(`
+    <div class="success-toast animate__animated animate__bounceInRight bg-green-100 border-t-4 border-green-500 rounded-b text-green-darkest px-4 py-3 my-2 fixed absolute top-10 right-0" role="alert">
+      <div class="flex">
+        <i class="fas fa-check-circle h-6 w-6 text-green-500 mr-4 text-2xl"></i>
+        <div>
+          <p class="font-bold">Form successfully submitted</p>
+          <p class="text-sm"> A copy of your order will be sent to your email</p>
+        </div>
+      </div>
+    </div>
+    `)
+    // $('.success-toast').removeClass('hidden')
+    localStorage.removeItem('form-success');
+    //Hide Toast
+    setTimeout(
+    function() 
+    {
+      $('.success-toast').addClass('animate__animated animate__fadeOut')
+    }, 7000);
+  }
+</script>
