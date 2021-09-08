@@ -64,6 +64,7 @@ app.use(vhost(`*.${domain}`, test));
 
 const SERVER_PORT = process.env.PORT || 8081;
 app.use((req, res, next) => {
+  console.log(domain)
   console.log(req.subdomains)
   res.set('Cache-Control', 'no-store')
   next()
