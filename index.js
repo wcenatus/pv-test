@@ -11,7 +11,7 @@ require('dotenv').config()
 
 //HELPERS
 const emailHelper = require('./helpers/emailHelper');
-const domain = String(process.NODE_ENV) === 'prod' ? "herokuapp.com" : "mysite.localhost";
+const domain = process.env.NODE_ENV === 'prod' ? "herokuapp.com" : "mysite.localhost";
 const app = express(),
       test = express()
       // zimmer = express(),
